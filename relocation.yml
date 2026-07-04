@@ -63,9 +63,9 @@ resilience4j:
         failureRateThreshold: 50 # Процент ошибок, после которого цепь открывается
         waitDurationInOpenState: 10s # Сколько времени цепь остается открытой. для запросов CallNotPermittedException
         permittedNumberOfCallsInHalfOpenState: 3 # Сколько пробных запросов разрешено
-      ignore-exceptions:
-        - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
-      instances:
+        ignore-exceptions:
+          - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
+    instances:
       accountingCircuitBreaker:
         base-config: default
       profilerCircuitBreaker:
@@ -78,13 +78,13 @@ resilience4j:
       default:
         max-attempts: 3 # сколько всего попыток
         wait-duration: 10s # пауза между попытками
-      ignore-exceptions:
-        - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
+        ignore-exceptions:
+          - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
     instances:
-      accounting-service:
+      accountingRetry:
         base-config: default
-      security-service:
+      profilerRetry:
         base-config: default
-      profiler-service:
+      securityRetry:
         base-config: default
   
