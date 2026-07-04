@@ -51,3 +51,45 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+resilience4j:
+  circuitbreaker:
+    circuit-breaker-aspect-order: 1 # приоритет выполнения аспекта @CircuitBreaker (чтобы первым был CircuitBreaker а не ретрай)
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED # Тип окна статистики. COUNT_BASED/TIME_BASED Статистика по количеству последних вызовов/ за промежуток времени
+        slidingWindowSize: 10 # если COUNT_BASED сколько запросов анализируется, или TIME_BASED за сколько секунд анализируется
+        minimumNumberOfCalls: 5 # Минимальное количество вызовов до начала анализа. После пятого начинается вычисление процента ошибок
+        failureRateThreshold: 50 # Процент ошибок, после которого цепь открывается
+        waitDurationInOpenState: 10s # Сколько времени цепь остается открытой. для запросов CallNotPermittedException
+        permittedNumberOfCallsInHalfOpenState: 3 # Сколько пробных запросов разрешено
+      ignore-exceptions:
+        - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
+      instances:
+      accountingCircuitBreaker:
+        base-config: default
+      profilerCircuitBreaker:
+        base-config: default
+      securityCircuitBreaker:
+        base-config: default
+  retry:
+    retry-aspect-order: 2 # порядок выполнения Spring AOP аспектов (тоесть вторым)
+    configs:
+      default:
+        max-attempts: 3 # сколько всего попыток
+        wait-duration: 10s # пауза между попытками
+      ignore-exceptions:
+        - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
+    instances:
+      accounting-service:
+        base-config: default
+      security-service:
+        base-config: default
+      profiler-service:
+        base-config: default
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"     
