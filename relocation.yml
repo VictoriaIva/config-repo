@@ -76,8 +76,8 @@ resilience4j:
     retry-aspect-order: 2 # порядок выполнения Spring AOP аспектов (тоесть вторым)
     configs:
       default:
-        max-attempts: 3 # сколько всего попыток
-        wait-duration: 10s # пауза между попытками
+        maxAttempts: 3 # сколько всего попыток
+        waitDuration: 10s # пауза между попытками
         ignoreExceptions:
           - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
     instances:
