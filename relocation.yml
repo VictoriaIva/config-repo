@@ -63,28 +63,28 @@ resilience4j:
         failureRateThreshold: 50 # Процент ошибок, после которого цепь открывается
         waitDurationInOpenState: 10s # Сколько времени цепь остается открытой. для запросов CallNotPermittedException
         permittedNumberOfCallsInHalfOpenState: 3 # Сколько пробных запросов разрешено
-        ignore-exceptions:
+        ignoreExceptions:
           - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
     instances:
       accountingCircuitBreaker:
-        base-config: default
+        baseConfig: default
       profilerCircuitBreaker:
-        base-config: default
+        baseConfig: default
       securityCircuitBreaker:
-        base-config: default
+        baseConfig: default
   retry:
     retry-aspect-order: 2 # порядок выполнения Spring AOP аспектов (тоесть вторым)
     configs:
       default:
         max-attempts: 3 # сколько всего попыток
         wait-duration: 10s # пауза между попытками
-        ignore-exceptions:
+        ignoreExceptions:
           - by.javaguru.jdmik7.relocation.api.exception.ServiceBadRequestException
     instances:
       accountingRetry:
-        base-config: default
+        baseConfig: default
       profilerRetry:
-        base-config: default
+        baseConfig: default
       securityRetry:
-        base-config: default
+        baseConfig: default
   
