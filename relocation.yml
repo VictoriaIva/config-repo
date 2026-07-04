@@ -35,7 +35,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: "*"
 logging:
   level:
     root: info
@@ -87,9 +87,4 @@ resilience4j:
         base-config: default
       profiler-service:
         base-config: default
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"     
+  
