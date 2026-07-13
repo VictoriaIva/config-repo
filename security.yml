@@ -7,15 +7,7 @@ spring:
     multipart:
       file-size-threshold: 2048
       max-file-size: 5MB
-  jpa:
-    hibernate:
-      ddl-auto: none
-    open-in-view: true
-    properties:
-      jakarta:
-        persistence:
-          sharedCache:
-            mode: UNSPECIFIED
+
   jackson:
     deserialization:
       fail-on-unknown-properties: true
