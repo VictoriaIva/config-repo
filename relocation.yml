@@ -34,7 +34,7 @@ logging:
     by.javaguru.profiler: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-  config: env/logback-spring-local.xml
+  config: logback-spring-local.xml
 
 image:
   storage-dir: ${IMAGES_STORAGE_FOLDER}
